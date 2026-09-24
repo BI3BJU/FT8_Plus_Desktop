@@ -1,5 +1,5 @@
 @echo off
-cd /d C:\FT8_Plus
+cd /d "%~dp0"
 pyinstaller --clean --onefile --noconsole ^
   --icon=logo.ico ^
   --add-data "logo.ico;." ^
