@@ -1,45 +1,144 @@
-# README.md
+# AES-256-GCM Text Encryption Tool
 
-# FT8 Plus 1.0 Protocol Feature Demo
+[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Python](https://img.shields.io/badge/Python-3.8%2B-blue)](https://www.python.org/)
+[![Platform](https://img.shields.io/badge/Platform-CLI%20%7C%20GUI-lightgrey)](https://github.com/BI3BJU/Text-encryption-tool-python)
+[![GitHub last commit](https://img.shields.io/github/last-commit/BI3BJU/Text-encryption-tool-python)]
 
-Based on PyFT8, this program implements the FT8 Plus 1.0 protocol for demonstration purposes.
+---
 
-## Capabilities
+## Screenshots
 
-- Receive standard FT8 messages: i3=1, decode standard callsign, grid, reports.
-- Transmit/receive free text: i3=0, n3=0, up to 13 chars, base-42 charset.
-- Transmit/receive beacon: i3=0, n3=0, content is "callsign + 6-char Maidenhead grid", every 4 slots (60s).
-- Transmit/receive transparent single frame: i3=6, f2=0, up to 9 bytes, no CRC/EOT.
-- Transmit/receive transparent continuous frame: i3=6, f2=1, multi-frame, 9-byte chunks, CRC8+EOT, up to 64 frames.
-- Callsign strictly 3~6 chars; grid strictly 6-char Maidenhead.
-- Auto extract sender callsign from message start, validate and add contact.
-- Highlight in orange when own callsign is targeted.
-- Auto save config, contacts, history, status.
-- NTP time correction, half-duplex.
+| Main |
+| :---: |
+| ![Main](./main.jpg) |
 
-## Radio Control & Audio
+### 📖 Introduction
 
-- No radio control: no PTT, CAT, serial, freq, mode control; only audio output.
-- Optional preamble noise for VOX control: 1s before slot, 0.5s white noise + 0.5s silence, then FT8 audio.
-- Uses system default audio devices.
+**AES-256-GCM Text Encryption Tool** is a lightweight desktop application built with Python and Tkinter, designed to securely encrypt and decrypt arbitrary Unicode text.  
+It uses the industry-standard AES-256-GCM authenticated encryption algorithm, supports both Base64 and Hex output formats, and automatically detects the encoding of input ciphertext – making it extremely easy to use.
 
-## Fixed Parameters
+Developed by BI3BJU, this open-source project is ideal for personal privacy protection, password management assistance, and more.
 
-- Cycle 15s; sample rate 12000 Hz; symbol rate 6.25; HPS=4; BPT=2.
-- 0.04s per hop; 0.160s per symbol; 375 hops/cycle; 750 hops/2 cycles.
-- TX freq 300~3000 Hz; default 1500 Hz; step 6.25 Hz.
-- Max raw data 574 bytes; total 576 bytes; max 64 frames.
-- Freq group tolerance +/-10 Hz; merge delay 4 slots (60s).
-- Max contacts 100; max history 100; max status messages 100; max note 32 bytes.
+### ✨ Features
 
-## Persistent Files
+- ✅ AES-256-GCM encryption – ensures confidentiality, integrity, and authenticity
+- 🔑 Flexible key input – accepts any text (derived via SHA-256) or a 32-byte Base64 random key (recommended)
+- 🎲 One-click random key generation – uses system-secure RNG and auto-copies to clipboard
+- 📋 Automatic clipboard integration – results are copied to clipboard after encryption/decryption
+- 🔄 Auto-detection of ciphertext format – no need to select Base64 or Hex manually when pasting; the program decodes it automatically
+- 📊 Real-time statistics – shows UTF-8 byte count of plaintext and ciphertext length (characters for Base64, bytes for Hex) based on current format
+- 🌐 Bilingual UI (English/Chinese) – switches based on system language (Windows / Linux / macOS)
+- 🖱️ Right-click context menu – supports copy, paste, cut, select all, clear for efficient editing
+- 🎨 Clean and intuitive UI – clear layout with a status bar giving real-time feedback
 
-- config.txt: callsign, TX freq, preamble noise, grid.
-- contact.txt: contacts, one "callsign,note" per line.
-- history.txt: history, JSON Lines.
-- status.txt: status log, plain text.
+### 🚀 Quick Start
 
-## Validation Rules
+#### Requirements
+- Python 3.6+
+- Dependency: cryptography (Tkinter is built-in with Python)
 
-- Callsign: strict 3~6 chars, structure 1~2 prefix + 1 digit + 0~3 letters, prefix has at least one letter.
-- Grid: strict 6-char Maidenhead, format [A-R]{2}[0-9]{2}[A-X]{2}.
+#### Install dependency
+Run command: `pip install -r requirements.txt`
+
+#### Run the program
+Run command: `python main.py`
+
+### 🧩 Usage Guide
+
+1. **Key**  
+   - You may enter any arbitrary text (e.g., a passphrase); the program will hash it with SHA-256 to derive a 32-byte key.  
+   - It is highly recommended to click the “Generate Key” button to obtain a high-entropy Base64 random key and store it securely.  
+   - The input field shows a placeholder hint, encouraging the use of a password manager for strong key generation.
+
+2. **Encryption**  
+   - Type your plaintext in the “Plaintext” area.  
+   - Choose output format (Base64 or Hex).  
+   - Click “Encrypt →” – the ciphertext will appear in the “Ciphertext” area and be automatically copied to your clipboard.  
+   - The ciphertext length statistics will update accordingly.
+
+3. **Decryption**  
+   - Paste the ciphertext (Base64 or Hex, automatically detected) into the “Ciphertext” area.  
+   - Ensure the correct key is entered.  
+   - Click “← Decrypt” – upon success, the plaintext is displayed and copied to clipboard.
+
+4. **Real-time statistics**  
+   - Below the plaintext area, the UTF-8 byte count is shown.  
+   - Below the ciphertext area, the length is displayed: characters for Base64, bytes for Hex. If the ciphertext is invalid, a warning appears.
+
+5. **Context Menu**  
+   - Right-click (or two-finger tap on touchpad) inside any text box to open a context menu for copy, paste, cut, select all, and clear.
+
+### 🔒 Security Notes
+
+- Algorithm: AES-256-GCM (Galois/Counter Mode) – an authenticated encryption mode that detects tampering and wrong keys.  
+- Nonce: A fresh 12-byte nonce is generated for each encryption (using os.urandom), ensuring that identical plaintexts yield different ciphertexts.  
+- Key derivation: SHA-256 is used to hash any input into a 32-byte key. Strongly recommended: use the high-entropy Base64 key generated by the “Generate Key” button, rather than a simple password, to resist dictionary attacks.  
+- Data safety: The key exists only in memory; the program does not save any data to disk (unless you manually copy it out).  
+- Error handling: Decryption failures show a generic “wrong key or corrupted data” message, avoiding internal state leakage.
+
+### 🛠️ Technology Stack
+
+- Frontend: Tkinter (Python built-in GUI library)  
+- Cryptography: AESGCM from the cryptography library  
+- Encoding: Automatic Base64 / Hex detection and conversion  
+- Internationalisation: System locale detection with a custom I18n singleton manager
+
+### 📁 Project Structure
+
+- `main.py` — Main program
+- `requirements.txt` — Python dependencies
+- `build.bat` — Optional Windows build script
+- `build.sh` — Optional Linux/macOS build script
+- `LICENSE` — MIT License
+- `.gitignore` — Git ignore rules
+- `README.md` — This documentation
+
+### 📝 Changelog
+
+- v1.0 (2026-06) – First stable release with basic encryption/decryption, bilingual UI, clipboard integration, and real-time statistics.
+
+### 👤 Author
+
+BI3BJU – Amateur radio enthusiast & open-source developer
+
+### 📄 License
+
+This project is licensed under the MIT License – see the [LICENSE](LICENSE) file for details.
+
+## 🌐 Cross-Platform Interoperability
+
+The **Python client** provided in this project and the **Java client (https://github.com/BI3BJU/Text-Encryption-Tool-Java)** share a fully consistent and aligned underlying encryption architecture.
+This means: **Ciphertext encrypted on the Python side can be directly decrypted on the Android side, and vice versa.**
+
+### 🔐 Core Encryption Standards
+
+Both implementations strictly adhere to the following mathematical and cryptographic specifications during encryption and decryption:
+
+1. **Key Derivation**:
+Both sides utilize the **SHA-256** algorithm. User-provided passwords of any length are first converted into a `UTF-8` byte stream and then derived into a fixed **32-byte (256-bit)** strong key for subsequent AES encryption.
+2. **Encryption Algorithm**:
+Uses the industry-standard **AES-256-GCM** authenticated encryption mode (configured with `NoPadding` and a **128-bit / 16-byte** authentication tag).
+3. **Random Nonce/IV**:
+For every encryption operation, a fresh **12-byte Nonce** is generated using a system-level cryptographically secure random number generator (Python's `os.urandom` and Android's `SecureRandom`). Consequently, even if the password and plaintext remain identical, the resulting ciphertext differs every time.
+
+---
+
+### 📦 Ciphertext Data Structure
+
+To ensure seamless interoperability of the binary data generated by both clients, the ciphertext undergoes strict byte concatenation prior to transmission or display. Regardless of whether the format is Base64 or Hex (hexadecimal), the structure of the unpacked raw binary byte stream is as follows:
+
+| Byte Range | Data Type | Purpose |
+| :--- | :--- | :--- |
+| `0 ~ 11` (First 12 bytes) | **Nonce (IV)** | Initialization Vector; used to prevent replay attacks and ensure ciphertext uniqueness |
+| `12 ~ End` (Remaining bytes) | **Ciphertext + Auth Tag** | The actual encrypted ciphertext followed by the 16-byte GCM authentication tag |
+
+During decryption, the programs on both ends automatically slice the input to read the first 12 bytes as the Nonce, while extracting the remaining bytes as the ciphertext and tag for integrity verification and decryption.
+
+---
+
+### 🔄 Transmission Format Support
+
+Both programs feature a built-in **ciphertext format auto-detection engine**. When you copy the ciphertext for decryption, there is no need to manually select the input format; the tool automatically identifies and parses the following two encoding formats:
+* **Base64 string** (e.g., `aBc1...==`)
+* **Hex / Hexadecimal string** (e.g., `61626331...`)
