@@ -27,7 +27,7 @@ Based on PyFT8, this program implements the FT8 Plus 1.0 protocol for demonstrat
 - Transmit/receive beacon: i3=0, n3=0, content is "callsign + 6-char Maidenhead grid", every 4 slots (60s).
 - Transmit/receive transparent single frame: i3=6, f2=0, up to 9 bytes, no CRC/EOT.
 - Transmit/receive transparent continuous frame: i3=6, f2=1, multi-frame, 9-byte chunks, CRC8+EOT, up to 64 frames.
-- Callsign strictly 3~6 chars; grid strictly 6-char Maidenhead.
+- Callsign strictly 3~6 chars.
 - Auto extract sender callsign from message start, validate and add contact.
 - Highlight in orange when own callsign is targeted.
 - Auto save config, contacts, history, status.
