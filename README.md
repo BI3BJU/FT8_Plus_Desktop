@@ -127,7 +127,6 @@ On first start, configure your callsign, grid, TX frequency, and optional preamb
 
 4. Choose an operating mode:
 
-   - **Standard FT8**: `i3=1`, standard callsign, grid, and reports.
    - **Free text**: `i3=0`, `n3=0`, up to 13 characters, base-42 charset.
    - **Transparent single frame**: `i3=6`, `f2=0`, up to 9 bytes, no CRC/EOT.
    - **Transparent continuous frame**: `i3=6`, `f2=1`, multi-frame, 9-byte chunks, CRC8+EOT, up to 64 frames.
