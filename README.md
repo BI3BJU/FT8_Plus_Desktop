@@ -129,7 +129,6 @@ On first start, configure your callsign, grid, TX frequency, and optional preamb
 
    - **Standard FT8**: `i3=1`, standard callsign, grid, and reports.
    - **Free text**: `i3=0`, `n3=0`, up to 13 characters, base-42 charset.
-   - **Beacon**: `i3=0`, `n3=0`, content is `callsign + 6-char Maidenhead grid`, transmitted every 4 slots (60 s).
    - **Transparent single frame**: `i3=6`, `f2=0`, up to 9 bytes, no CRC/EOT.
    - **Transparent continuous frame**: `i3=6`, `f2=1`, multi-frame, 9-byte chunks, CRC8+EOT, up to 64 frames.
 
