@@ -1,0 +1,28 @@
+# ft8_constants.py - 协议 / 全局常量
+import re
+
+# 数据尺寸
+MAX_RAW_DATA_BYTES = 574
+MAX_TOTAL_BYTES    = 576
+MAX_FRAMES         = 64
+MAX_NOTE_BYTES     = 32
+MAX_CONTACTS       = 100
+MAX_ACTIVE_BUFFERS = 200
+
+# UI 上限
+FIXED_MAX_HISTORY  = 100
+FIXED_MAX_MESSAGES = 100
+FIXED_FREQ_START   = 300
+FIXED_FREQ_END     = 3000
+
+# 分帧合并
+FIXED_DELAY_SLOTS    = 4
+FIXED_DELAY_SECONDS  = FIXED_DELAY_SLOTS * 15
+FREQ_GROUP_TOLERANCE = 10     # Hz
+
+# 透明帧协议
+PROTOCOL_PAD_BYTE = 0x20   # space
+PROTOCOL_EOT_BYTE = 0x04   # EOT
+
+# 信标文本: <CALL>+{1,}PLUS
+BEACON_PATTERN = re.compile(r'^([A-Z0-9]{3,7})\+{1,}PLUS$')
