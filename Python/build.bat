@@ -1,0 +1,13 @@
+@echo off
+cd /d "%~dp0"
+pyinstaller --clean --onefile --noconsole ^
+  --icon=logo.ico ^
+  --add-data "logo.ico;." ^
+  --add-data "strings-zh-rCN.txt;." ^
+  --add-data "strings-en-rUS.txt;." ^
+  --version-file version.txt ^
+  --name=FT8_Plus ^
+  main.py
+echo.
+echo Build done: dist\FT8_Plus.exe
+pause
