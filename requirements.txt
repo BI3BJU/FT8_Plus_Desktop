@@ -1,0 +1,11 @@
+# FT8 Plus 1.0 — Python 3.10+
+
+# Required
+numpy
+pyaudio
+
+# Optional: NTP time sync
+ntplib
+
+# Optional: Windows system location (Location button)
+# winsdk
