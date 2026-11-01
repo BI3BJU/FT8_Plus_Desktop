@@ -1,0 +1,29 @@
+# UTF-8
+VSVersionInfo(
+  ffi=FixedFileInfo(
+    filevers=(1, 0, 0, 0),
+    prodvers=(1, 0, 0, 0),
+    mask=0x3f,
+    flags=0x0,
+    OS=0x4,
+    fileType=0x1,
+    subtype=0x0,
+    date=(0, 0)
+  ),
+  kids=[
+    StringFileInfo(
+      [
+        StringTable(
+          u'040904B0',
+          [StringStruct(u'CompanyName', u'BI3BJU'),
+           StringStruct(u'FileDescription', u'FT8 Plus 1.0 Protocol Demo'),
+           StringStruct(u'FileVersion', u'1.0.0.0'),
+           StringStruct(u'InternalName', u'FT8_Plus'),
+           StringStruct(u'LegalCopyright', u'Copyright (C) 2026 BI3BJU'),
+           StringStruct(u'OriginalFilename', u'FT8_Plus.exe'),
+           StringStruct(u'ProductName', u'FT8 Plus'),
+           StringStruct(u'ProductVersion', u'1.0.0.0')])
+      ]),
+    VarFileInfo([VarStruct(u'Translation', [1033, 1200])])
+  ]
+)
